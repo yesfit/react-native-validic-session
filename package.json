@@ -1,0 +1,25 @@
+{
+  "name": "react-native-validic-session",
+  "title": "React Native Validic Mobile Session",
+  "version": "1.3.0",
+  "description": "Validic Session React native integration",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native",
+    "validic",
+    "health",
+    "fitness"
+  ],
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "16.9.0",
+    "react-native": "0.61.2"
+  },
+  "devDependencies": {
+    "react": "16.9.0",
+    "react-native": "0.61.2"
+  }
+}

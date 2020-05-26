@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><ul>
+<li><a href="#getting-started">Getting started</a>
+<ul>
+<li><a href="#linking">Linking</a>
+<ul>
+<li><a href="#automatic">Automatic</a></li>
+<li><a href="#manual">Manual</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#usage">Usage</a>
+<ul>
+<li><a href="#provisioning-a-user">Provisioning a User</a></li>
+<li><a href="#managing-a-session">Managing a session</a>
+<ul>
+<li><a href="#events">Events</a></li>
+</ul>
+</li>
+<li><a href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
+<h2>Getting started</h2>
+<pre class="prettyprint source lang-shell"><code>$ npm install react-native-validic-session --save`
+</code></pre>
+<p>or use yarn</p>
+<pre class="prettyprint source lang-shell"><code>$ yarn add react-native-validic-session`
+</code></pre>
+<h3>Linking</h3>
+<h4>Automatic</h4>
+<pre class="prettyprint source lang-shell"><code>react-native link react-native-validic-session
+</code></pre>
+<p><em>For iOS users using Pods</em>
+You still need to run <code>pod install</code> after running the above link command inside your <code>IOS</code> folder.</p>
+<h4>Manual</h4>
+<details>
+    <summary>iOS (via CocoaPods) RN >= 60</summary>
+<p>Add the following lines to your build targets in your <code>Podfile</code></p>
+<pre class="prettyprint source lang-ruby"><code>pod 'React', :path => '../node_modules/react-native'
+
+pod 'RNValidicSession', :path= => '../node_modules/react-native-validic-session'
+
+</code></pre>
+<p>Then run <code>pod install</code></p>
+</details>
+<details>
+    <summary>iOS (without CocoaPods)</summary>
+<p>In XCode, in the project navigator:</p>
+<ul>
+<li>Right click <em>Libraries</em></li>
+<li>Add Files to <em>[your project's name]</em></li>
+<li>Go to <code>node_modules/react-native-validic-session/ios</code></li>
+<li>Add the file <code>RNValidicHealthkit.xcodeproj</code></li>
+</ul>
+<p>In XCode, in the project navigator, select your project.</p>
+<ul>
+<li>Add the <code>libRNValidicHealthkit.a</code> from the <em>RNValidicHealthkit</em> project to your project's <em>Build Phases ➜ Link Binary With Libraries</em></li>
+<li>Click <code>.xcodeproj</code> file you added before in the project navigator and go the <em>Build Settings</em> tab. Make sure <em>All</em> is toggled on (instead of <em>Basic</em>).</li>
+<li>Look for <em>Header Search Paths</em> and make sure it contains both <code>$(SRCROOT)/../react-native/React</code> and <code>$(SRCROOT)/../../React</code></li>
+<li>Mark both as recursive (should be OK by default).</li>
+</ul>
+<p>In the General tab there will be a panel at the bottom of the screen labeled &quot;Embedded Binaries&quot;. You should see the frameworks added here.</p>
+<p><img src="img/Linked_Frameworks.png" alt="Linked Frameworks"></p>
+<p>Next copy 'copy-validicmobile.rb' to the <code>ios</code> folder of your project.</p>
+<p>Go to the build settings of your target. In the &quot;Build Phases&quot; tab add a new build phase by clicking the plus button at the top and selecting &quot;New Run Script Phase&quot;.</p>
+<p><img src="img/Build_Phase.png" alt="Build Phase"></p>
+<p>In the new phase's text area paste in <code>ruby copy-validicmobile.rb</code>.</p>
+<p><img src="img/Copy_Script.png" alt="Copy Script"></p>
+</details>
+<details>
+	<summary>Android</summary>
+<ol>
+<li>Open up <code>android/app/src/main/java/[...]/MainApplication.java</code></li>
+</ol>
+<ul>
+<li>Add <code>import com.validic.mobile.rn.session.RNValidicMobileSessionPackage;</code> to the imports at the top of the file</li>
+<li>Add <code>new RNValidicMobileSessionPackage()</code> to the list returned by the <code>getPackages()</code> method</li>
+</ul>
+<ol start="2">
+<li>Append the following lines to <code>android/settings.gradle</code>:<pre class="prettyprint source"><code>include ':react-native-validic-session'
+project(':react-native-validic-session').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-validic-session/android')
+</code></pre>
+</li>
+<li>Insert the following lines inside the dependencies block in <code>android/app/build.gradle</code>:<pre class="prettyprint source"><code>  compile project(':react-native-validic-session')
+</code></pre>
+</li>
+</ol>
+</details>	  
+<h2>Usage</h2>
+<h3>Provisioning a User</h3>
+<p>The Validic Mobile library requires a Validic user. A Validic user can be provisioned using the <a href="http://validic.com/api#1649">Validic API</a>. The library requires a Validic user ID, user access token and organization ID. It is recommended to <a href="https://validic.com/contentblock/user-provisioning">provision the user</a> on your server, the mobile app could then authenticate to the server and retrieve the Validic credentials.</p>
+<pre class="prettyprint source lang-javascript"><code>import ValidicSession from 'react-native-validic-session';
+</code></pre>
+<h3>Managing a session</h3>
+<p>The <code>ValidicSession</code> persists a user across the sdk and all pending record uploads. This data is persisted between
+app launches but is deleted if the <code>ValidicSession.endSession</code> function is called.</p>
+<p>A new Session is started by passing previously provisioned Validic user credentials to the <code>startSession</code> function.</p>
+<pre class="prettyprint source lang-js"><code>ValidicSession.startSession({user_id:USER_ID, org_id: ORGANIZATION_ID, user_token: USER_ACCESS_TOKEN});
+</code></pre>
+<p>The supplied credentials are not validated when the session is created. Records will fail to upload if invalid credentials have been provided. Credentials are stored persistently. To change credentials, call:</p>
+<pre class="prettyprint source lang-js"><code>ValidicSession.endSession();
+</code></pre>
+<p>or uninstall the app. When a new session is created, pending record uploads and subscriptons are reset. For this reason, a new session should only be created if a session it not already active.</p>
+<p>The app can be informed of record upload success and failure by registering callbacks using:</p>
+<h4>Events</h4>
+<p>Listeners can be added to listen for success or failure of records submitted to the Validic Api. Registration of listeners is typically done during component initialization to catch events for record uploads which may occur upon app restart.</p>
+<pre class="prettyprint source lang-js"><code>ValidicSession.eventEmitter.addListener('validic:session:onsuccess', (record)=>{
+	// the record was successfully uploaded to validic servers
+	console.log(&quot;Successfully got record&quot; + JSON.stringify(record));
+});
+ValidicSession.eventEmitter.addListener('validic:session:onerror', (error, record)=>{
+	// an error was returned while submitting the record
+	console.error(&quot;Got error: &quot;+error + &quot; for record: &quot; + record.activity_id);
+});
+</code></pre>
+<h3>Example</h3>
+<p>The following example starts a session if a session is not already active and registers session listeners.</p>
+<pre class="prettyprint source lang-js"><code>
+componentDidMount(){
+ValidicSession.eventEmitter.addListener('validic:session:onsuccess', (record)=>{
+	// the record was successfully uploaded to validic servers
+	console.log(&quot;Successfully got record&quot; + JSON.stringify(record));
+});
+ValidicSession.eventEmitter.addListener('validic:session:onerror', (error, record)=>{
+	// an error was returned while submitting the record
+	console.error(&quot;Got error: &quot;+error + &quot; for record: &quot; + record.activity_id);
+});
+
+var user = {
+    user_id: &quot;replace with userid&quot;,
+    user_token : &quot;replace with access token&quot;,
+    org_id : &quot;replace with organization id&quot;
+};
+// check if a persistent user already exists 
+ValidicSession.getUser((response)=>{
+	//if not, start a new session
+	if(response.user == null){
+		ValidicSession.startSession(user);
+	}
+});
+}
+
+...
+//remove event listeners when the component is going to be unmounted 
+componentWillUnmount(){
+	ValidicSession.eventEmitter.removeAllListeners('validic:session:onsuccess');
+	ValidicSession.eventEmitter.removeAllListeners('validic:session:onerror');
+}
+
+</code></pre></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="ValidicSession.html">ValidicSession</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Wed May 06 2020 20:39:28 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
