@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.license      = { :file => "LICENSE" }
   s.author       = ["Validic Mobile"]
   s.platform     = :ios, "10.0"
-  s.source       = { :http => 'file:' + __dir__ + '/'}
+  s.source       = { :git => 'https://github.com/yesfit/react-native-validic-session.git', :tag => "v#{s.version}" }
 
   s.source_files =  "ios/Classes/*.{h,m}"
   s.requires_arc = true
