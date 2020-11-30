@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:3.4.2")
+        classpath("com.android.tools.build:gradle:4.1.0")
     }
 }
 
@@ -16,9 +16,9 @@ def safeExtGet(prop, fallback) {
     rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
 }
 
-def DEFAULT_COMPILE_SDK_VERSION = 28
-def DEFAULT_MIN_SDK_VERSION = 19
-def DEFAULT_TARGET_SDK_VERSION = 28
+def DEFAULT_COMPILE_SDK_VERSION = 30
+def DEFAULT_MIN_SDK_VERSION = 21
+def DEFAULT_TARGET_SDK_VERSION = 30
 
 android {
     compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
@@ -56,16 +56,12 @@ repositories {
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
-    implementation files("libs/validicmobile-shared-full-release.aar")
+    implementation files("libs/validicmobile-shared-full-prod-release.aar")
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation ('com.squareup.retrofit2:retrofit:2.4.0'){
-        exclude group:'com.squareup.okhttp3', module: 'okhttp'
-    }
-    implementation ('com.squareup.retrofit2:converter-gson:2.4.0'){
-        exclude group:'com.squareup.okhttp3', module: 'okhttp'
-    }
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
-    implementation 'androidx.work:work-runtime:2.2.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.8.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.2'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.4'
+    implementation 'androidx.work:work-runtime:2.4.0'
 }
 
 def configureReactNativePom(def pom) {
